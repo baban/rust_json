@@ -1,9 +1,12 @@
 use rust_json::json::*;
 
 macro_rules! json {
-  (null) => { Json::Null };
-  (true) => { Json::Boolean(true) };
-  (false) => { Json::Boolean(false) };
+    (null) => { Json::Null };
+    (true) => { Json::Boolean(true) };
+    (false) => { Json::Boolean(false) };
+    ([ $($element:tt),* ]) => {
+        Json::Array(vec![ $( json!($element) ), * ])
+    }
 }
 
 fn main() {
@@ -33,6 +36,13 @@ mod tests {
     fn false_works() {
         let json = json![false];
         let result = Json::Boolean(false);
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn array_works() {
+        let json = json!([true, false]);
+        let result = Json::Array(vec![Json::Boolean(true), Json::Boolean(false)]);
         assert_eq!(json, result);
     }
 }

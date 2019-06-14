@@ -1,3 +1,4 @@
+#[macro_use]
 pub mod json {
   use std::collections::HashMap;
   
@@ -10,5 +11,4 @@ pub mod json {
       Array(Vec<Json>),
       Object(Box<HashMap<String, Json>>)
   }
-
 }
