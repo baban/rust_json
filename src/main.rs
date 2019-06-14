@@ -6,7 +6,16 @@ macro_rules! json {
     (false) => { Json::Boolean(false) };
     ([ $($element:tt),* ]) => {
         Json::Array(vec![ $( json!($element) ), * ])
-    }
+    };
+    ({ $($key:tt : $value:tt),* }) => {
+        Json::Object(
+            Box::new(
+                vec![
+                    $( ($key.to_string(), json!($value) ) ), *
+                ].into_iter().collect()
+            )
+        )
+    };
 }
 
 fn main() {
@@ -17,6 +26,7 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::collections::HashMap;
 
     #[test]
     fn null_works() {
@@ -43,6 +53,17 @@ mod tests {
     fn array_works() {
         let json = json!([true, false]);
         let result = Json::Array(vec![Json::Boolean(true), Json::Boolean(false)]);
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn one_hash_works() {
+        let json = json!({ "a": true });
+
+        let mut map = HashMap::new();
+        map.insert("a".to_string(), Json::Boolean(true));
+
+        let result = Json::Object(Box::new(map));
         assert_eq!(json, result);
     }
 }
