@@ -1,5 +1,7 @@
 pub mod json {
   use std::collections::HashMap;
+  
+  #[derive(Clone, PartialEq, Debug)]
   pub enum Json {
       Null,
       Boolean(bool),
@@ -8,4 +10,5 @@ pub mod json {
       Array(Vec<Json>),
       Object(Box<HashMap<String, Json>>)
   }
+
 }
