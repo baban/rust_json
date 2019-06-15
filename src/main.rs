@@ -1,25 +1,10 @@
+#[macro_use]
+use rust_json::*;
 use rust_json::json::*;
-
-macro_rules! json {
-    (null) => { Json::Null };
-    (true) => { Json::Boolean(true) };
-    (false) => { Json::Boolean(false) };
-    ([ $($element:tt),* ]) => {
-        Json::Array(vec![ $( json!($element) ), * ])
-    };
-    ({ $($key:tt : $value:tt),* }) => {
-        Json::Object(
-            Box::new(
-                vec![
-                    $( ($key.to_string(), json!($value) ) ), *
-                ].into_iter().collect()
-            )
-        )
-    };
-}
 
 fn main() {
     let json = json![true];
+    let result = Json::Null;
     println!("{:?}", json);
 }
 
@@ -62,6 +47,18 @@ mod tests {
 
         let mut map = HashMap::new();
         map.insert("a".to_string(), Json::Boolean(true));
+
+        let result = Json::Object(Box::new(map));
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn hash_works() {
+        let json = json!({ "a": true, "b": false });
+
+        let mut map = HashMap::new();
+        map.insert("a".to_string(), Json::Boolean(true));
+        map.insert("b".to_string(), Json::Boolean(false));
 
         let result = Json::Object(Box::new(map));
         assert_eq!(json, result);
