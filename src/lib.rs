@@ -22,7 +22,7 @@ pub mod json {
       )*
     }
   }
-  impl_from_num_to_json!(i32, f64);
+  impl_from_num_to_json!(u8, i8, u16, i16, u32, i32, u64, i64, usize, isize, f32, f64);
 }
 
 #[macro_export]

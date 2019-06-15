@@ -64,15 +64,49 @@ mod tests {
     }
 
     #[test]
+    fn i8_works() {
+        let n: i8 = 1;
+        let json = json!(n);
+        let result = Json::Number(1.0);
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn u8_works() {
+        let n: u8 = 1;
+        let json = json!(n);
+        let result = Json::Number(1.0);
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn u16_works() {
+        let n: u16 = 1;
+        let json = json!(n);
+        let result = Json::Number(1.0);
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn i16_works() {
+        let n: i16 = 1;
+        let json = json!(n);
+        let result = Json::Number(1.0);
+        assert_eq!(json, result);
+    }
+
+    #[test]
     fn i32_works() {
-        let json = json!(1);
+        let n: i32 = 1;
+        let json = json!(n);
         let result = Json::Number(1.0);
         assert_eq!(json, result);
     }
 
     #[test]
     fn f64_works() {
-        let json = json!(1);
+        let n: f64 = 1.0;
+        let json = json!(n);
         let result = Json::Number(1.0);
         assert_eq!(json, result);
     }
