@@ -1,10 +1,9 @@
-#[macro_use]
 use rust_json::*;
 use rust_json::json::*;
 
 fn main() {
     let json = json![true];
-    let result = Json::Null;
+    // let result = Json::Null;
     println!("{:?}", json);
 }
 
@@ -61,6 +60,20 @@ mod tests {
         map.insert("b".to_string(), Json::Boolean(false));
 
         let result = Json::Object(Box::new(map));
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn i32_works() {
+        let json = json!(1);
+        let result = Json::Number(1.0);
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn f64_works() {
+        let json = json!(1);
+        let result = Json::Number(1.0);
         assert_eq!(json, result);
     }
 }

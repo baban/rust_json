@@ -10,6 +10,19 @@ pub mod json {
       Array(Vec<Json>),
       Object(Box<HashMap<String, Json>>)
   }
+
+  macro_rules! impl_from_num_to_json {
+    ( $( $t:ident ),* ) => {
+      $(
+        impl From<$t> for Json {
+          fn from(n: $t) -> Json {
+            Json::Number(n as f64)
+          }
+        }
+      )*
+    }
+  }
+  impl_from_num_to_json!(i32, f64);
 }
 
 #[macro_export]
@@ -30,6 +43,7 @@ macro_rules! json {
       )
   };
   ($other:tt) => {
-      
+      Json::from($other)
   }
 }
+
