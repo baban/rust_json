@@ -96,8 +96,56 @@ mod tests {
     }
 
     #[test]
+    fn u32_works() {
+        let n: u32 = 1;
+        let json = json!(n);
+        let result = Json::Number(1.0);
+        assert_eq!(json, result);
+    }
+
+    #[test]
     fn i32_works() {
         let n: i32 = 1;
+        let json = json!(n);
+        let result = Json::Number(1.0);
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn u64_works() {
+        let n: u64 = 1;
+        let json = json!(n);
+        let result = Json::Number(1.0);
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn i64_works() {
+        let n: i64 = 1;
+        let json = json!(n);
+        let result = Json::Number(1.0);
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn usize_works() {
+        let n: usize = 1;
+        let json = json!(n);
+        let result = Json::Number(1.0);
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn isize_works() {
+        let n: isize = 1;
+        let json = json!(n);
+        let result = Json::Number(1.0);
+        assert_eq!(json, result);
+    }
+
+    #[test]
+    fn f32_works() {
+        let n: f32 = 1.0;
         let json = json!(n);
         let result = Json::Number(1.0);
         assert_eq!(json, result);
