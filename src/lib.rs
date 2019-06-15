@@ -11,6 +11,12 @@ pub mod json {
       Object(Box<HashMap<String, Json>>)
   }
 
+  impl<'a> From<&'a str> for Json {
+    fn from(s: &'a str) -> Json {
+      Json::String(s.to_string())
+    }
+  }
+
   macro_rules! impl_from_num_to_json {
     ( $( $t:ident ),* ) => {
       $(

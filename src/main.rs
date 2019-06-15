@@ -110,4 +110,11 @@ mod tests {
         let result = Json::Number(1.0);
         assert_eq!(json, result);
     }
+
+    #[test]
+    fn string_works() {
+        let json = json!("Hello");
+        let result = Json::String("Hello".to_string());
+        assert_eq!(json, result);
+    }
 }
